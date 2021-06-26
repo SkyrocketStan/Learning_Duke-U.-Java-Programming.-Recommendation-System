@@ -34,4 +34,14 @@ public class SecondRatings {
   public int getMovieSize() {
     return this.myMovies.size();
   }
+
+  /**
+   * A public method which returns the number of raters that were read in and stored in the
+   * ArrayList of type Rater.
+   *
+   * @return int number of movies
+   */
+  public int getRaterSize() {
+    return this.myRaters.size();
+  }
 }

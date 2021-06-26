@@ -15,6 +15,14 @@ import java.util.Map;
  * @version 1.0
  */
 public class FirstRatings {
+  public ArrayList<Movie> getMovieArrayList() {
+    return movieArrayList;
+  }
+
+  public ArrayList<Rater> getRaterArrayList() {
+    return raterArrayList;
+  }
+
   private ArrayList<Movie> movieArrayList;
   private ArrayList<Rater> raterArrayList;
 

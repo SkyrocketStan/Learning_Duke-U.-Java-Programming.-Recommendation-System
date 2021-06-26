@@ -24,4 +24,14 @@ public class SecondRatings {
     myMovies = firstRatings.getMovieArrayList();
     myRaters = firstRatings.getRaterArrayList();
   }
+
+  /**
+   * A public method which returns the number of movies that were read in and stored in the
+   * ArrayList of type Movie
+   *
+   * @return int number of movies
+   */
+  public int getMovieSize() {
+    return this.myMovies.size();
+  }
 }

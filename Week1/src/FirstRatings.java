@@ -24,6 +24,16 @@ public class FirstRatings {
   }
 
   private ArrayList<Movie> movieArrayList;
+
+  /**
+   * This method returns number of unique Raters
+   *
+   * @return int number of unique raters
+   */
+  public int getRatersNumber() {
+    return ratersWithIds.size();
+  }
+
   private ArrayList<Rater> raterArrayList;
 
   private HashMap<String, HashSet<String>> directorsAndItsMovies;

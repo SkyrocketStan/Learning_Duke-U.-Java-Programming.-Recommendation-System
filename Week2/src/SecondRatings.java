@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class SecondRatings {
   private final ArrayList<Movie> myMovies;
   private final ArrayList<Rater> myRaters;
+  private final FirstRatings firstRatings;
 
   public SecondRatings() {
     // default constructor
@@ -20,7 +21,7 @@ public class SecondRatings {
   // loadRaters methods in FirstRatings to read in all the movie and ratings data and store them
   // in the two private ArrayList variables of the SecondRatings class, myMovies and myRaters.
   public SecondRatings(String moviesFileName, String ratingsFileName) {
-    FirstRatings firstRatings = new FirstRatings(moviesFileName, ratingsFileName);
+    firstRatings = new FirstRatings(moviesFileName, ratingsFileName);
     myMovies = firstRatings.getMovieArrayList();
     myRaters = firstRatings.getRaterArrayList();
   }
@@ -42,6 +43,6 @@ public class SecondRatings {
    * @return int number of movies
    */
   public int getRaterSize() {
-    return this.myRaters.size();
+    return this.firstRatings.getRatersNumber();
   }
 }

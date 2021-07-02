@@ -5,7 +5,7 @@ public class MovieRunnerAverage {
   public void printAverageRatings() {
     SecondRatings secondRatings = new SecondRatings("ratedmovies_short.csv", "ratings_short.csv");
     System.out.printf(
-        "Total number of movies %d, total number of raters %d",
+        "Total number of movies %d, total number of raters %d\n",
         secondRatings.getMovieSize(), secondRatings.getRaterSize());
   }
 }

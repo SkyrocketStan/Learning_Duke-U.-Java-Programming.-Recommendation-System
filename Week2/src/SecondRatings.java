@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Week2. A new class to do many of the calculations focusing on computing averages on movie
@@ -11,6 +12,7 @@ public class SecondRatings {
   private final ArrayList<Movie> myMovies;
   private final ArrayList<Rater> myRaters;
   private final FirstRatings firstRatings;
+  private final HashMap<String, ArrayList<Double>> moviesAndRatings;
 
   public SecondRatings() {
     // default constructor
@@ -24,6 +26,27 @@ public class SecondRatings {
     firstRatings = new FirstRatings(moviesFileName, ratingsFileName);
     myMovies = firstRatings.getMovieArrayList();
     myRaters = firstRatings.getRaterArrayList();
+    moviesAndRatings = getMoviesAndRatingsMap();
+  }
+
+  // Returns a Map with movieID and all its ratings
+  private HashMap<String, ArrayList<Double>> getMoviesAndRatingsMap() {
+    HashMap<String, ArrayList<Double>> map = new HashMap<>();
+
+    for (Movie movie : myMovies) {
+      map.putIfAbsent(movie.getID(), new ArrayList<>());
+    }
+
+    for (Rater rater : myRaters) {
+      ArrayList<String> ratings = rater.getItemsRated();
+      for (String movieID : ratings) {
+        // String movieID, double rating
+        ArrayList<Double> list = map.get(movieID);
+        list.add(rater.getRating(movieID));
+      }
+    }
+
+    return map;
   }
 
   /**
@@ -44,5 +67,21 @@ public class SecondRatings {
    */
   public int getRaterSize() {
     return this.firstRatings.getRatersNumber();
+  }
+
+  /*
+  This method returns a double representing the average movie rating for this ID
+  if there are at least minimalRaters ratings.
+  If there are not minimalRaters ratings, then it returns 0.0.
+  */
+  private Double getAverageByID(String id, Integer minimalRaters) {
+    double result = 0.0;
+    ArrayList<Double> ratings = moviesAndRatings.get(id);
+    if (ratings != null && ratings.size() >= minimalRaters) {
+      result = ratings.stream().mapToDouble(d -> d).average().orElse(0.0);
+    }
+
+    // If there are no ratings returns 0.0
+    return result;
   }
 }

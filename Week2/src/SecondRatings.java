@@ -84,4 +84,24 @@ public class SecondRatings {
     // If there are no ratings returns 0.0
     return result;
   }
+
+  /**
+   * This method should find the average rating for every movie that has been rated by at least
+   * minimalRaters raters.
+   *
+   * @param minimalRaters int the minimal number of raters supplying a rating
+   * @return an ArrayList of all the Rating objects for movies that have at least the minimal number
+   *     of raters supplying a rating
+   */
+  public ArrayList<Rating> getAverageRatings(int minimalRaters) {
+    ArrayList<Rating> list = new ArrayList<>();
+    for (Movie movie : myMovies) {
+      String movieID = movie.getID();
+      Double averageRating = getAverageByID(movieID, minimalRaters);
+      if (averageRating != 0.0) {
+        list.add(new Rating(movieID, averageRating));
+      }
+    }
+    return list;
+  }
 }

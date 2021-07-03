@@ -13,6 +13,7 @@ public class SecondRatings {
   private final ArrayList<Rater> myRaters;
   private final FirstRatings firstRatings;
   private final HashMap<String, ArrayList<Double>> moviesAndRatings;
+  private final HashMap<String, String> moviesIdAndTitles;
 
   public SecondRatings() {
     // default constructor
@@ -27,6 +28,18 @@ public class SecondRatings {
     myMovies = firstRatings.getMovieArrayList();
     myRaters = firstRatings.getRaterArrayList();
     moviesAndRatings = getMoviesAndRatingsMap();
+    moviesIdAndTitles = getAllMoviesAndTitlesMap();
+  }
+
+  // Get all movies and titles map
+  private HashMap<String, String> getAllMoviesAndTitlesMap() {
+    HashMap<String, String> map = new HashMap<>();
+    for (Movie movie : myMovies) {
+      String movieID = movie.getID();
+      String movieTitle = movie.getTitle();
+      map.put(movieID, movieTitle);
+    }
+    return map;
   }
 
   // Returns a Map with movieID and all its ratings
@@ -103,5 +116,19 @@ public class SecondRatings {
       }
     }
     return list;
+  }
+
+  /*
+   * This method returns the title of the movie with that ID.
+   * If the movie ID does not exist, then this method should return a String
+   * indicating the ID was not found.
+   * */
+  String getTitle(String id) {
+    String title = moviesIdAndTitles.get(id);
+    if (title != null) {
+      return title;
+    }
+    // No title found
+    return "ID " + id + " NOT FOUND";
   }
 }

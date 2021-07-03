@@ -15,7 +15,25 @@ import java.util.Map;
  * @version 1.0
  */
 public class FirstRatings {
+  public ArrayList<Movie> getMovieArrayList() {
+    return movieArrayList;
+  }
+
+  public ArrayList<Rater> getRaterArrayList() {
+    return raterArrayList;
+  }
+
   private ArrayList<Movie> movieArrayList;
+
+  /**
+   * This method returns number of unique Raters
+   *
+   * @return int number of unique raters
+   */
+  public int getRatersNumber() {
+    return ratersWithIds.size();
+  }
+
   private ArrayList<Rater> raterArrayList;
 
   private HashMap<String, HashSet<String>> directorsAndItsMovies;

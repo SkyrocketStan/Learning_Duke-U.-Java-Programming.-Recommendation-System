@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Duke-U.-Java-Programming.-Recommendation-System.iml" filepath="$PROJECT_DIR$/.idea/Duke-U.-Java-Programming.-Recommendation-System.iml" />
       <module fileurl="file://$PROJECT_DIR$/Week1/Week1.iml" filepath="$PROJECT_DIR$/Week1/Week1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Week2/Week2.iml" filepath="$PROJECT_DIR$/Week2/Week2.iml" />
     </modules>
   </component>
 </project>

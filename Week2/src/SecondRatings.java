@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Week2. A new class to do many of the calculations focusing on computing averages on movie
@@ -130,5 +132,20 @@ public class SecondRatings {
     }
     // No title found
     return "ID " + id + " NOT FOUND";
+  }
+  /*
+   * This method returns the movie ID of this movie.
+   * If the title is not found, return “NO SUCH TITLE.
+   * */
+  String getID(String title) {
+    String result = "NO SUCH TITLE";
+
+    for (Map.Entry<String, String> entry : moviesIdAndTitles.entrySet()) {
+      if (Objects.equals(title, entry.getValue())) {
+        return entry.getKey();
+      }
+    }
+
+    return result;
   }
 }

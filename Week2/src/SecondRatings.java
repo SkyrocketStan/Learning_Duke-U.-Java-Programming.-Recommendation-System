@@ -89,7 +89,7 @@ public class SecondRatings {
   if there are at least minimalRaters ratings.
   If there are not minimalRaters ratings, then it returns 0.0.
   */
-  private Double getAverageByID(String id, Integer minimalRaters) {
+  Double getAverageByID(String id, Integer minimalRaters) {
     double result = 0.0;
     ArrayList<Double> ratings = moviesAndRatings.get(id);
     if (ratings != null && ratings.size() >= minimalRaters) {

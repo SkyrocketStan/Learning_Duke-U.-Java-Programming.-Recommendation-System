@@ -212,7 +212,7 @@ public class FirstRatings {
   }
 
   // Make full filename for any OS types
-  private String getFullFileName(String fileName) {
+  private static String getFullFileName(String fileName) {
     if (!(new File(fileName).exists())) {
       fileName =
           System.getProperty("user.dir") + File.separator + "data" + File.separator + fileName;
@@ -346,7 +346,7 @@ public class FirstRatings {
    * This method should process every record from the CSV file whose name is
    * filename, a file of raters and their ratings
    */
-  private ArrayList<Rater> loadRaters(String fileName) {
+  static ArrayList<Rater> loadRaters(String fileName) {
     ArrayList<Rater> ratersList = new ArrayList<>();
     ArrayList<String> idsList = new ArrayList<>();
 

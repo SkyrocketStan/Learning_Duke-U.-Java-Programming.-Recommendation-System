@@ -366,14 +366,14 @@ public class FirstRatings {
       double rating = Double.parseDouble(record.get(2));
       String time = record.get(3);
       if (!idsList.contains(rater_id)) {
-        Rater rater = new PlainRater(rater_id);
+        Rater rater = new EfficientRater(rater_id);
         ratersList.add(rater);
-        rater.addRating(movie_id, rating);
+        rater.addRating(movie_id, new Rating(movie_id, rating));
         idsList.add(rater_id);
       } else {
         for (Rater r : ratersList) {
           if (r.getID().equals(rater_id)) {
-            r.addRating(movie_id, rating);
+            r.addRating(movie_id, new Rating(movie_id, rating));
           }
         }
       }

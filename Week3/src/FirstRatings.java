@@ -105,7 +105,7 @@ public class FirstRatings {
   }
 
   // Process every record from the CSV file.
-  private ArrayList<Movie> loadMovies(String filename) {
+  ArrayList<Movie> loadMovies(String filename) {
 
     // Create empty list of Movie's
     ArrayList<Movie> moviesList = new ArrayList<>();

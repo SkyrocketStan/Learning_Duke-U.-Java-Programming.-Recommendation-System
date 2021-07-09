@@ -3,15 +3,15 @@ import java.util.ArrayList;
 public class ThirdRatings {
 
   private final ArrayList<Rater> myRaters;
-  private ArrayList<String> allMoviesIDs;
+  private final ArrayList<String> allMoviesIDs;
 
   public ThirdRatings() {
     this("ratings.csv");
-    allMoviesIDs = MovieDatabase.filterBy(new TrueFilter());
   }
 
   public ThirdRatings(String ratingsFileName) {
     this.myRaters = FirstRatings.loadRaters(ratingsFileName);
+    this.allMoviesIDs = MovieDatabase.filterBy(new TrueFilter());
   }
 
   public ArrayList<Rating> getAverageRatings(int minimalRaters) {

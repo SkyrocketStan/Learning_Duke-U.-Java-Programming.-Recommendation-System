@@ -62,4 +62,20 @@ public class FourthRatings {
     }
     return result;
   }
+
+  private ArrayList<Rating> getSimilarities(String id) {
+    ArrayList<Rating> list = new ArrayList<>();
+    Rater me = RaterDatabase.getRater(id);
+    for (Rater rater : RaterDatabase.getRaters()) {
+      if (!me.getID().equals(rater.getID())) {
+        double dotProduct = dotProduct(me, rater);
+        if (dotProduct > 0) {
+          Rating rating = new Rating(rater.getID(), dotProduct);
+          list.add(rating);
+        }
+      }
+    }
+    list.sort(Collections.reverseOrder());
+    return list;
+  }
 }

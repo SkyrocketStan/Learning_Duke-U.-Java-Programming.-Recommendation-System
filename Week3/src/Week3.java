@@ -5,11 +5,9 @@ public class Week3 {
     //    averageRatings.forEach(System.out::println);
     MovieRunnerWithFilters filters = new MovieRunnerWithFilters();
     filters.printAverageRatingsByYear(1, 2000);
-    System.out.println("---");
     filters.printAverageRatingsByGenre(1, "Crime");
-    System.out.println("---");
     filters.printAverageRatingsByMinutes(1, 110, 170);
-    System.out.println("---");
+    filters.printAverageRatingsByDirectors(1, "Charles Chaplin,Michael Mann,Spike Jonze");
 
     //    MovieRunnerWithFilters filtersFull =
     //            new MovieRunnerWithFilters("ratedmoviesfull.csv", "ratings.csv");

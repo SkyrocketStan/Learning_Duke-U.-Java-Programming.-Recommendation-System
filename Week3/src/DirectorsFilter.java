@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 /**
  * A class for filter movies by directors
  *
@@ -15,8 +13,13 @@ public class DirectorsFilter implements Filter {
 
   @Override
   public boolean satisfies(String id) {
-    String[] movieDirectors = MovieDatabase.getDirector(id).split(",");
+    String movieDirectors = MovieDatabase.getDirector(id);
     String[] filterDirectors = directors.split(",");
-    return Arrays.asList(movieDirectors).containsAll(Arrays.asList(filterDirectors));
+    for (String direcor : filterDirectors) {
+      if (movieDirectors.contains(direcor)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -76,12 +76,12 @@ public class FirstRatings {
       if (!idsList.contains(rater_id)) {
         Rater rater = new EfficientRater(rater_id);
         ratersList.add(rater);
-        rater.addRating(movie_id, new Rating(movie_id, rating));
+        rater.addRating(movie_id, rating);
         idsList.add(rater_id);
       } else {
         for (Rater r : ratersList) {
           if (r.getID().equals(rater_id)) {
-            r.addRating(movie_id, new Rating(movie_id, rating));
+            r.addRating(movie_id, rating);
           }
         }
       }

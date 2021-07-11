@@ -1,8 +1,9 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public interface Rater {
   //  void addRating(String item, double rating);
-  void addRating(String movieID, Rating rating);
+  void addRating(String movieID, double rating);
 
   boolean hasRating(String item);
 
@@ -13,4 +14,6 @@ public interface Rater {
   int numRatings();
 
   ArrayList<String> getItemsRated();
+
+  HashMap<String, Rating> getMyRatings();
 }

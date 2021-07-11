@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 /**
  * The week 4 class
@@ -23,7 +24,7 @@ public class FourthRatings {
     return 0.0;
   }
 
-  private ArrayList<Rating> getAverageRatings(int minimalRaters) {
+  public ArrayList<Rating> getAverageRatings(int minimalRaters) {
     ArrayList<Rating> list = new ArrayList<>();
     ArrayList<String> allMoviesIDs = MovieDatabase.filterBy(new TrueFilter());
     for (String movieID : allMoviesIDs) {
@@ -35,8 +36,7 @@ public class FourthRatings {
     return list;
   }
 
-  private ArrayList<Rating> getAverageRatingsByFilter(
-      Integer minimalRaters, Filter filterCriteria) {
+  public ArrayList<Rating> getAverageRatingsByFilter(Integer minimalRaters, Filter filterCriteria) {
     ArrayList<Rating> ratingsList = new ArrayList<>();
     ArrayList<String> allMoviesIDs = MovieDatabase.filterBy(filterCriteria);
     Rating rating;
@@ -49,5 +49,17 @@ public class FourthRatings {
 
     Collections.sort(ratingsList);
     return ratingsList;
+  }
+
+  private double dotProduct(Rater meRater, Rater otherRater) {
+    HashMap<String, Rating> myRatings = meRater.getMyRatings();
+    double result = 0.0;
+    for (String id : myRatings.keySet()) {
+      double scale = meRater.getRating(id) - 5;
+      if (otherRater.hasRating(id)) {
+        result += scale * (otherRater.getRating(id) - 5);
+      }
+    }
+    return result;
   }
 }

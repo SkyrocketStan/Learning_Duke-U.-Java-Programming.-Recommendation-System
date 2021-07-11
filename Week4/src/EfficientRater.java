@@ -16,8 +16,8 @@ public class EfficientRater implements Rater {
     myRatings = new HashMap<>();
   }
 
-  public void addRating(String movieID, Rating rating) {
-    myRatings.put(movieID, rating);
+  public void addRating(String movieID, double rating) {
+    myRatings.put(movieID, new Rating(movieID, rating));
   }
 
   public boolean hasRating(String movieID) {
@@ -43,5 +43,9 @@ public class EfficientRater implements Rater {
 
   public ArrayList<String> getItemsRated() {
     return new ArrayList<>(myRatings.keySet());
+  }
+
+  public HashMap<String, Rating> getMyRatings() {
+    return myRatings;
   }
 }

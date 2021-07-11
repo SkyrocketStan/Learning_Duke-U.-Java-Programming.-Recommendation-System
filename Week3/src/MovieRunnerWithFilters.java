@@ -47,7 +47,7 @@ public class MovieRunnerWithFilters {
   }
 
   private void printRatingsList(ArrayList<Rating> averageRatingList) {
-    System.out.printf("Found %d movies%n", averageRatingList.size());
+    System.out.printf("Found %d movie(s)%n", averageRatingList.size());
     averageRatingList.stream()
         .sorted()
         .forEach(
@@ -98,13 +98,24 @@ public class MovieRunnerWithFilters {
   }
 
   /**
-   * Print a list of movies and their average ratings sorted by time
+   * Print a list of movies and their average ratings sorted by Directors
    *
    * @param minimalRatings Minimal number of ratings
    * @param directors directors of the movies
    */
   public void printAverageRatingsByDirectors(int minimalRatings, String directors) {
+    System.out.println("Print movies directed by " + directors);
     printRatingsList(
         thirdRatings.getAverageRatingsByFilter(minimalRatings, new DirectorsFilter(directors)));
+  }
+
+  public void printAverageRatingsByYearAfterAndGenre(int minimalRatings, int year, String genre) {
+    AllFilters filters = new AllFilters();
+    filters.addFilter(new GenreFilter(genre));
+    filters.addFilter(new YearAfterFilter(year));
+    System.out.printf(
+        "Print movie(s) with at least %d rating in \"%s\" genre produced after year" + " of %d %n",
+        minimalRatings, genre, year);
+    printRatingsList(thirdRatings.getAverageRatingsByFilter(minimalRatings, filters));
   }
 }

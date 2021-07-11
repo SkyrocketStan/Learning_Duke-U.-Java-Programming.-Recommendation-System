@@ -8,6 +8,7 @@ public class Week3 {
     filters.printAverageRatingsByGenre(1, "Crime");
     filters.printAverageRatingsByMinutes(1, 110, 170);
     filters.printAverageRatingsByDirectors(1, "Charles Chaplin,Michael Mann,Spike Jonze");
+    filters.printAverageRatingsByYearAfterAndGenre(1, 1980, "Romance");
 
     //    MovieRunnerWithFilters filtersFull =
     //            new MovieRunnerWithFilters("ratedmoviesfull.csv", "ratings.csv");

@@ -3,6 +3,12 @@ public class Week3 {
     //    ThirdRatings week3 = new ThirdRatings();
     //    ArrayList<Rating> averageRatings = week3.getAverageRatings(1);
     //    averageRatings.forEach(System.out::println);
-    MovieRunnerWithFilters.printAverageRatings(1);
+    MovieRunnerWithFilters filters = new MovieRunnerWithFilters();
+    filters.printAverageRatingsByYear(1, 2000);
+    System.out.println("---");
+
+    //    MovieRunnerWithFilters filtersFull =
+    //            new MovieRunnerWithFilters("ratedmoviesfull.csv", "ratings.csv");
+    //    filtersFull.printAverageRatingsByYear(20, 2000);
   }
 }

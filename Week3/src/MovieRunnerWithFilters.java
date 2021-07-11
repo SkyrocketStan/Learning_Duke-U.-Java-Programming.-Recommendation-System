@@ -19,8 +19,6 @@ public class MovieRunnerWithFilters {
    * @param minimalRatings int specified number of ratings
    */
   public void printAverageRatings(int minimalRatings) {
-    //    ThirdRatings thirdRatings = new ThirdRatings("ratedmovies_short.csv",
-    // "ratings_short.csv");
     ArrayList<Rating> ratedList = thirdRatings.getAverageRatings(minimalRatings);
 
     Collections.sort(ratedList);
@@ -60,6 +58,12 @@ public class MovieRunnerWithFilters {
                     MovieDatabase.getTitle(rating.getItem())));
   }
 
+  /**
+   * Print a list of movies and their average ratings sorted by Year and minimal number of raters
+   *
+   * @param minimalRatings int minimal number of ratings
+   * @param year int Year of produce
+   */
   public void printAverageRatingsByYear(int minimalRatings, int year) {
     System.out.println("number of raters " + thirdRatings.getRaterSize());
     System.out.println("number of movies " + MovieDatabase.size());
@@ -67,5 +71,27 @@ public class MovieRunnerWithFilters {
         thirdRatings.getAverageRatingsByFilter(minimalRatings, new YearAfterFilter(year));
     System.out.printf("found %d movies%n", aveRating.size());
     printRatingsList(aveRating);
+  }
+
+  /**
+   * Print a list of movies and their average ratings sorted by Genre
+   *
+   * @param genre String Genre
+   */
+  public void printAverageRatingsByGenre(String genre) {
+    ArrayList<Rating> averageRatings =
+        thirdRatings.getAverageRatingsByFilter(1, new GenreFilter(genre));
+    System.out.printf("found %d movies%n", averageRatings.size());
+    averageRatings.stream()
+        .sorted()
+        .forEach(
+            rating -> {
+              String movieID = rating.getItem();
+              System.out.printf(
+                  "%-4s %s%n     %s%n",
+                  rating.getValue(),
+                  MovieDatabase.getTitle(movieID),
+                  MovieDatabase.getGenres(movieID));
+            });
   }
 }

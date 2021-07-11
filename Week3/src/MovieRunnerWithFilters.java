@@ -61,7 +61,7 @@ public class MovieRunnerWithFilters {
   /**
    * Print a list of movies and their average ratings sorted by Year and minimal number of raters
    *
-   * @param minimalRatings int minimal number of ratings
+   * @param minimalRatings Minimal number of ratings
    * @param year int Year of produce
    */
   public void printAverageRatingsByYear(int minimalRatings, int year) {
@@ -76,11 +76,12 @@ public class MovieRunnerWithFilters {
   /**
    * Print a list of movies and their average ratings sorted by Genre
    *
-   * @param genre String Genre
+   * @param minimalRatings Minimal number of ratings
+   * @param genre Genre
    */
-  public void printAverageRatingsByGenre(String genre) {
+  public void printAverageRatingsByGenre(int minimalRatings, String genre) {
     ArrayList<Rating> averageRatings =
-        thirdRatings.getAverageRatingsByFilter(1, new GenreFilter(genre));
+        thirdRatings.getAverageRatingsByFilter(minimalRatings, new GenreFilter(genre));
     System.out.printf("found %d movies%n", averageRatings.size());
     averageRatings.stream()
         .sorted()
@@ -92,6 +93,31 @@ public class MovieRunnerWithFilters {
                   rating.getValue(),
                   MovieDatabase.getTitle(movieID),
                   MovieDatabase.getGenres(movieID));
+            });
+  }
+
+  /**
+   * Print a list of movies and their average ratings sorted by time
+   *
+   * @param minimalRatings Minimal number of ratings
+   * @param minMinutes Minimal length of movies in minutes
+   * @param maxMinutes Maximum length of movies in minutes
+   */
+  public void printAverageRatingsByMinutes(int minimalRatings, int minMinutes, int maxMinutes) {
+    ArrayList<Rating> averageRatings =
+        thirdRatings.getAverageRatingsByFilter(
+            minimalRatings, new MinutesFilter(minMinutes, maxMinutes));
+    System.out.printf("found %d movies%n", averageRatings.size());
+    averageRatings.stream()
+        .sorted()
+        .forEach(
+            rating -> {
+              String movieID = rating.getItem();
+              System.out.printf(
+                  "%-4s Time: %-3d %s%n",
+                  rating.getValue(),
+                  MovieDatabase.getMinutes(movieID),
+                  MovieDatabase.getTitle(movieID));
             });
   }
 }

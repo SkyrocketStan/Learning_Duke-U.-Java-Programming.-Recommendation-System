@@ -118,4 +118,15 @@ public class MovieRunnerWithFilters {
         minimalRatings, genre, year);
     printRatingsList(thirdRatings.getAverageRatingsByFilter(minimalRatings, filters));
   }
+
+  public void printAverageRatingsByDirectorsAndMinutes(
+      int minimalRatings, int minMinutes, int maxMinutes, String director) {
+    AllFilters filters = new AllFilters();
+    filters.addFilter(new MinutesFilter(minMinutes, maxMinutes));
+    filters.addFilter(new DirectorsFilter(director));
+    System.out.printf(
+        "Print movie(s) with at least %d rating at least %d minutes long directed by %s%n",
+        minimalRatings, minMinutes, director);
+    printRatingsList(thirdRatings.getAverageRatingsByFilter(minimalRatings, filters));
+  }
 }

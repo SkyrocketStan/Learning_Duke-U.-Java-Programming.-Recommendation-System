@@ -9,7 +9,8 @@ public class Week3 {
     filters.printAverageRatingsByMinutes(1, 110, 170);
     filters.printAverageRatingsByDirectors(1, "Charles Chaplin,Michael Mann,Spike Jonze");
     filters.printAverageRatingsByYearAfterAndGenre(1, 1980, "Romance");
-
+    filters.printAverageRatingsByDirectorsAndMinutes(
+        1, 30, 170, "Spike Jonze,Michael Mann,Charles Chaplin,Francis Ford Coppola");
     //    MovieRunnerWithFilters filtersFull =
     //            new MovieRunnerWithFilters("ratedmoviesfull.csv", "ratings.csv");
     //    filtersFull.printAverageRatingsByYear(20, 2000);

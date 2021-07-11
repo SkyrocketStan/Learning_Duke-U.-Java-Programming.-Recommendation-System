@@ -3,13 +3,24 @@ import java.util.Collections;
 
 public class MovieRunnerWithFilters {
 
+  private final ThirdRatings thirdRatings;
+
+  public MovieRunnerWithFilters(String moviesFileName, String ratingsFileName) {
+    this.thirdRatings = new ThirdRatings(moviesFileName, ratingsFileName);
+  }
+
+  public MovieRunnerWithFilters() {
+    this("ratedmovies_short.csv", "ratings_short.csv");
+  }
+
   /**
    * Print a list of movies and their average ratings sorted by averages
    *
    * @param minimalRatings int specified number of ratings
    */
-  public static void printAverageRatings(int minimalRatings) {
-    ThirdRatings thirdRatings = new ThirdRatings("ratings_short.csv");
+  public void printAverageRatings(int minimalRatings) {
+    //    ThirdRatings thirdRatings = new ThirdRatings("ratedmovies_short.csv",
+    // "ratings_short.csv");
     ArrayList<Rating> ratedList = thirdRatings.getAverageRatings(minimalRatings);
 
     Collections.sort(ratedList);
@@ -31,23 +42,30 @@ public class MovieRunnerWithFilters {
     // Print out how many movies with ratings are returned,
     // then sort them, and print out the rating and title of each movie
     System.out.printf(
-        "How many movies with ratings %d are returned: %d\n",
+        "How many movies with ratings %d are returned: %d%n",
         minimalRatings, averageRatings.size());
 
+    printRatingsList(averageRatings);
+  }
+
+  private void printRatingsList(ArrayList<Rating> averageRatings) {
     averageRatings.stream()
         .sorted()
         .forEach(
             rating ->
                 System.out.printf(
-                    "%-4s %s%n", rating.getValue(), MovieDatabase.getTitle(rating.getItem())));
-    //    System.out.printf(
-    //            "The name of the movie that has the lowest rating is \"%s\"\n",
-    //            thirdRatings.getTitle(ratedList.get(0).getItem()));
-    //    for (Rating ratedObj : ratedList) {
-    //      double rating = ratedObj.getValue();
-    //      String movieID = ratedObj.getItem();
-    //      String movieTitle = secondRatings.getTitle(movieID);
-    //      System.out.println(rating + " " + movieTitle);
-    //    }
+                    "%-4s %s %s%n",
+                    rating.getValue(),
+                    MovieDatabase.getYear(rating.getItem()),
+                    MovieDatabase.getTitle(rating.getItem())));
+  }
+
+  public void printAverageRatingsByYear(int minimalRatings, int year) {
+    System.out.println("number of raters " + thirdRatings.getRaterSize());
+    System.out.println("number of movies " + MovieDatabase.size());
+    ArrayList<Rating> aveRating =
+        thirdRatings.getAverageRatingsByFilter(minimalRatings, new YearAfterFilter(year));
+    System.out.printf("found %d movies%n", aveRating.size());
+    printRatingsList(aveRating);
   }
 }

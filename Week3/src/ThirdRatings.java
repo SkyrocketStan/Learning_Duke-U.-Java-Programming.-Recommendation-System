@@ -1,17 +1,15 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ThirdRatings {
 
   private final ArrayList<Rater> myRaters;
   private final ArrayList<String> allMoviesIDs;
 
-  public ThirdRatings() {
-    this("ratings.csv");
-  }
-
-  public ThirdRatings(String ratingsFileName) {
+  public ThirdRatings(String moviesFileName, String ratingsFileName) {
     this.myRaters = FirstRatings.loadRaters(ratingsFileName);
-    this.allMoviesIDs = MovieDatabase.filterBy(new TrueFilter());
+    MovieDatabase.initialize(moviesFileName);
+    allMoviesIDs = MovieDatabase.filterBy(new TrueFilter());
   }
 
   public ArrayList<Rating> getAverageRatings(int minimalRaters) {
@@ -41,5 +39,26 @@ public class ThirdRatings {
           .orElse(0.0);
     }
     return 0.0;
+  }
+
+  public int getRaterSize() {
+    return myRaters.size();
+  }
+
+  public ArrayList<Rating> getAverageRatingsByFilter(Integer minimalRaters, Filter filterCriteria) {
+    ArrayList<Rating> rating = new ArrayList<>();
+    ArrayList<String> movies = MovieDatabase.filterBy(filterCriteria);
+    // System.out.println(movies);
+    Rating rat;
+    for (String movie_id : movies) {
+      if (getAverageByID(movie_id, minimalRaters) != 0) {
+        rat = new Rating(movie_id, getAverageByID(movie_id, minimalRaters));
+        rating.add(rat);
+      }
+    }
+
+    Collections.sort(rating);
+    // System.out.println(rating);
+    return rating;
   }
 } // class

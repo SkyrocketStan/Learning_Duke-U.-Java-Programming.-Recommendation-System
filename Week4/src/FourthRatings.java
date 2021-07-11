@@ -11,6 +11,7 @@ import java.util.HashMap;
 public class FourthRatings {
 
   private Double getAverageByID(String movieID, Integer minimalRaters) {
+    RaterDatabase.initialize("ratings.csv");
     ArrayList<Rater> myRaters = RaterDatabase.getRaters();
     long numOfRatings = myRaters.stream().filter(rater -> rater.hasRating(movieID)).count();
 
@@ -25,6 +26,7 @@ public class FourthRatings {
   }
 
   public ArrayList<Rating> getAverageRatings(int minimalRaters) {
+    RaterDatabase.initialize("ratings.csv");
     ArrayList<Rating> list = new ArrayList<>();
     ArrayList<String> allMoviesIDs = MovieDatabase.filterBy(new TrueFilter());
     for (String movieID : allMoviesIDs) {

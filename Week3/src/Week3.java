@@ -6,7 +6,9 @@ public class Week3 {
     MovieRunnerWithFilters filters = new MovieRunnerWithFilters();
     filters.printAverageRatingsByYear(1, 2000);
     System.out.println("---");
-    filters.printAverageRatingsByGenre("Crime");
+    filters.printAverageRatingsByGenre(1, "Crime");
+    System.out.println("---");
+    filters.printAverageRatingsByMinutes(1, 110, 170);
     System.out.println("---");
 
     //    MovieRunnerWithFilters filtersFull =

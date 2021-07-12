@@ -1,6 +1,8 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
+
+import static java.util.Collections.reverseOrder;
+import static java.util.Collections.sort;
 
 /**
  * The week 4 class
@@ -49,11 +51,11 @@ public class FourthRatings {
       }
     }
 
-    Collections.sort(ratingsList);
+    sort(ratingsList);
     return ratingsList;
   }
 
-  private double dotProduct(Rater meRater, Rater otherRater) {
+  public double dotProduct(Rater meRater, Rater otherRater) {
     HashMap<String, Rating> myRatings = meRater.getMyRatings();
     double result = 0.0;
     for (String id : myRatings.keySet()) {
@@ -77,7 +79,93 @@ public class FourthRatings {
         }
       }
     }
-    list.sort(Collections.reverseOrder());
+    list.sort(reverseOrder());
     return list;
+  }
+
+  public ArrayList<Rating> getSimilarRatings(
+      String id, Integer numSimilarRaters, Integer minimalRaters) {
+    ArrayList<Rating> ratingMoive = new ArrayList<>();
+    ArrayList<Rating> ratingRater = getSimilarities(id);
+    ArrayList<String> movies = MovieDatabase.filterBy(new TrueFilter());
+    for (String movie_id : movies) {
+      int md_id = Integer.parseInt(movie_id);
+      if (hasMinRaters(movie_id, minimalRaters, numSimilarRaters, ratingRater)) {
+        double sum = 0.0;
+        double ave;
+        double num = 0.0;
+        for (int i = 0; i < numSimilarRaters; i++) {
+          Rater rater = RaterDatabase.getRater(ratingRater.get(i).getItem());
+          HashMap<String, Rating> movieRated = rater.getMyRatings();
+          for (String mo_id : movieRated.keySet()) {
+            int rm_id = Integer.parseInt(mo_id);
+            if (rm_id == md_id) {
+              sum += ratingRater.get(i).getValue() * rater.getRating(mo_id);
+              num += 1;
+            }
+          }
+        }
+        if (num != 0.0) {
+          ave = sum / num;
+          Rating rating = new Rating(movie_id, ave);
+          ratingMoive.add(rating);
+        }
+      }
+    }
+    ratingMoive.sort(reverseOrder());
+    return ratingMoive;
+  }
+
+  private boolean hasMinRaters(
+      String movie_id,
+      Integer minimalRaters,
+      Integer numSimilarRaters,
+      ArrayList<Rating> ratingRater) {
+    int numOfRaters = 0;
+    int md_id = Integer.parseInt(movie_id);
+    for (int i = 0; i < numSimilarRaters; i++) {
+      Rater rater = RaterDatabase.getRater(ratingRater.get(i).getItem());
+      HashMap<String, Rating> movieRated = rater.getMyRatings();
+      for (String mo_id : movieRated.keySet()) {
+        int rm_id = Integer.parseInt(mo_id);
+        if (rm_id == md_id) {
+          numOfRaters += 1;
+        }
+      }
+    }
+    return numOfRaters >= minimalRaters;
+  }
+
+  public ArrayList<Rating> getSimilarRatingsByFilter(
+      String id, Integer numSimilarRaters, Integer minimalRaters, Filter filterCriteria) {
+    ArrayList<Rating> ratingMoive = new ArrayList<>();
+    ArrayList<Rating> ratingRater = getSimilarities(id);
+    ArrayList<String> movies = MovieDatabase.filterBy(filterCriteria);
+    for (String movie_id : movies) {
+      int md_id = Integer.parseInt(movie_id);
+      if (hasMinRaters(movie_id, minimalRaters, numSimilarRaters, ratingRater)) {
+        double sum = 0.0;
+        double ave;
+        double num = 0.0;
+        for (int i = 0; i < numSimilarRaters; i++) {
+          Rater rater = RaterDatabase.getRater(ratingRater.get(i).getItem());
+          HashMap<String, Rating> movieRated = rater.getMyRatings();
+          for (String mo_id : movieRated.keySet()) {
+            int rm_id = Integer.parseInt(mo_id);
+            if (rm_id == md_id) {
+              sum += ratingRater.get(i).getValue() * rater.getRating(mo_id);
+              num += 1.0;
+            }
+          }
+        }
+        if (num != 0.0) {
+          ave = sum / num;
+          Rating rating = new Rating(movie_id, ave);
+          ratingMoive.add(rating);
+        }
+      }
+    }
+    ratingMoive.sort(reverseOrder());
+    return ratingMoive;
   }
 }

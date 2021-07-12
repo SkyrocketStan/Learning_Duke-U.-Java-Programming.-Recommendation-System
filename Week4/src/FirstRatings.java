@@ -72,7 +72,6 @@ public class FirstRatings {
       String rater_id = record.get(0);
       String movie_id = record.get(1);
       double rating = Double.parseDouble(record.get(2));
-      String time = record.get(3);
       if (!idsList.contains(rater_id)) {
         Rater rater = new EfficientRater(rater_id);
         ratersList.add(rater);
@@ -89,23 +88,6 @@ public class FirstRatings {
 
     return ratersList;
   } // loadRaters
-
-  public ArrayList<Movie> getMovieArrayList() {
-    return movieArrayList;
-  }
-
-  public ArrayList<Rater> getRaterArrayList() {
-    return raterArrayList;
-  }
-
-  /**
-   * This method returns number of unique Raters
-   *
-   * @return int number of unique raters
-   */
-  public int getRatersNumber() {
-    return ratersWithIds.size();
-  }
 
   private HashMap<String, ArrayList<String>> getAllMoviesAndRatesMap(ArrayList<Movie> moviesList) {
     HashMap<String, ArrayList<String>> allMoviesAndRatesTempMap = new HashMap<>();
